@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menu — The Street Café, Norwich</title>
+  <meta name="description" content="The Street Café menu — all-day breakfast, brunch, toasties, sandwiches and proper coffee, served 8am till 2pm on Magdalen Street, Norwich.">
+  <meta name="theme-color" content="#243b30">
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+
+<!-- ============ Header ============ -->
+<header class="sc-header">
+  <div class="sc-headerInner">
+    <a href="index.html" class="sc-logo" aria-label="The Street Café — home">
+      <span class="sc-logoMark">The Street Café</span>
+      <span class="sc-logoSub">Magdalen Street · Norwich</span>
+    </a>
+    <nav class="sc-nav" id="nav" aria-label="Primary">
+      <a href="index.html" class="sc-navLink">Home</a>
+      <a href="menu.html" class="sc-navLink is-active">Menu</a>
+      <a href="visit.html" class="sc-navLink">Visit</a>
+    </nav>
+    <a class="sc-callBtn" href="tel:+441603766556" aria-label="Call The Street Café on 01603 766556">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>Call us</span>
+    </a>
+    <button class="sc-burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ Page hero ============ -->
+<section class="sc-pageHero">
+  <span class="sc-kicker">Served 08:00 – 14:00</span>
+  <h1>The menu</h1>
+  <p>All-day breakfast, fresh brunch and proper coffee. Everything cooked to order — eat in or take away.</p>
+</section>
+
+<main class="sc-section">
+  <div class="sc-wrap">
+    <p class="sc-menuNote">SAMPLE MENU — dishes &amp; prices are placeholders. Send the real menu and we'll drop it straight in.<br><span class="sc-tag sc-tag--v">V</span> vegetarian &nbsp; <span class="sc-tag sc-tag--vg">VG</span> vegan &nbsp; <span class="sc-tag sc-tag--gf">GF</span> gluten-free option</p>
+
+    <!-- Breakfast -->
+    <section class="sc-menuSection">
+      <div class="sc-menuSecHead"><span class="sc-num">01</span><h2>Breakfast</h2><span class="sc-when">From 8am</span></div>
+      <div class="sc-dishGrid">
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-full-english.jpg" alt="The full English" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-full-english.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">The Full English</span><span class="lead"></span><span class="pr">£9.50</span></div><p class="sc-dishDesc">Bacon, sausage, egg, baked beans, grilled tomato, mushrooms, hash brown and toast.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-veggie-breakfast.jpg" alt="Veggie breakfast" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-veggie-breakfast.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Veggie Breakfast <span class="sc-tag sc-tag--v">V</span></span><span class="lead"></span><span class="pr">£8.50</span></div><p class="sc-dishDesc">Egg, beans, tomato, mushrooms, hash brown, halloumi and toast.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-sausage-roll.jpg" alt="Sausage bap" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-sausage-roll.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Bacon or Sausage Roll</span><span class="lead"></span><span class="pr">£4.20</span></div><p class="sc-dishDesc">In a soft floured bap, with your choice of sauce.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-eggs-on-toast.jpg" alt="Eggs on toast" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-eggs-on-toast.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Eggs on Toast <span class="sc-tag sc-tag--v">V</span></span><span class="lead"></span><span class="pr">£5.50</span></div><p class="sc-dishDesc">Poached, fried or scrambled on thick-cut toast.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-porridge.jpg" alt="Porridge" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-porridge.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Porridge <span class="sc-tag sc-tag--v">V</span></span><span class="lead"></span><span class="pr">£4.50</span></div><p class="sc-dishDesc">Creamy oats with honey, banana or berries.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-breakfast-bap.jpg" alt="Loaded breakfast bap" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-breakfast-bap.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Loaded Breakfast Bap</span><span class="lead"></span><span class="pr">£6.00</span></div><p class="sc-dishDesc">Bacon, sausage and egg in one bap. The works.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Brunch -->
+    <section class="sc-menuSection">
+      <div class="sc-menuSecHead"><span class="sc-num">02</span><h2>Brunch</h2><span class="sc-when">All morning</span></div>
+      <div class="sc-dishGrid">
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-avocado.jpg" alt="Smashed avocado on sourdough" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-avocado.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Avocado on Sourdough <span class="sc-tag sc-tag--vg">VG</span></span><span class="lead"></span><span class="pr">£7.50</span></div><p class="sc-dishDesc">Smashed avocado, chilli flakes and lemon. Add a poached egg £1.50.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-eggs-benedict.jpg" alt="Eggs Benedict" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-eggs-benedict.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Eggs Benedict</span><span class="lead"></span><span class="pr">£8.50</span></div><p class="sc-dishDesc">Poached eggs, ham and hollandaise on a toasted muffin.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-pancakes.jpg" alt="Pancake stack" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-pancakes.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Pancake Stack <span class="sc-tag sc-tag--v">V</span></span><span class="lead"></span><span class="pr">£7.00</span></div><p class="sc-dishDesc">Fluffy pancakes with maple syrup and berries, or bacon.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-shakshuka.jpg" alt="Shakshuka" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-shakshuka.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Shakshuka <span class="sc-tag sc-tag--v">V</span></span><span class="lead"></span><span class="pr">£8.00</span></div><p class="sc-dishDesc">Baked eggs in a spiced tomato and pepper sauce with flatbread.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Toasties & sandwiches -->
+    <section class="sc-menuSection">
+      <div class="sc-menuSecHead"><span class="sc-num">03</span><h2>Toasties &amp; Sandwiches</h2><span class="sc-when">Till 2pm</span></div>
+      <div class="sc-dishGrid">
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-ham-toastie.jpg" alt="Cheese and ham toastie" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-ham-toastie.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Cheese &amp; Ham Toastie</span><span class="lead"></span><span class="pr">£5.50</span></div><p class="sc-dishDesc">Melted mature cheddar and ham on thick white or granary.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-tuna-melt.jpg" alt="Tuna melt" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-tuna-melt.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Tuna Melt</span><span class="lead"></span><span class="pr">£6.00</span></div><p class="sc-dishDesc">Tuna mayo and melted cheese, toasted golden.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-blt.jpg" alt="BLT" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-blt.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">BLT</span><span class="lead"></span><span class="pr">£5.80</span></div><p class="sc-dishDesc">Crispy bacon, lettuce, tomato and mayo.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-cheese-pickle.jpg" alt="Cheese and pickle sandwich" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-cheese-pickle.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Cheese &amp; Pickle <span class="sc-tag sc-tag--v">V</span> <span class="sc-tag sc-tag--gf">GF</span></span><span class="lead"></span><span class="pr">£4.80</span></div><p class="sc-dishDesc">Mature cheddar and tangy pickle. Gluten-free bread available.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Sweet -->
+    <section class="sc-menuSection">
+      <div class="sc-menuSecHead"><span class="sc-num">04</span><h2>Sweet</h2><span class="sc-when">With your coffee</span></div>
+      <div class="sc-dishGrid">
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-cake.jpg" alt="Cake of the day" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-cake.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Cake of the Day <span class="sc-tag sc-tag--v">V</span></span><span class="lead"></span><span class="pr">£3.50</span></div><p class="sc-dishDesc">Ask at the counter — there's always a fresh slice.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-teacake.jpg" alt="Toasted teacake" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-teacake.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Toasted Teacake <span class="sc-tag sc-tag--v">V</span></span><span class="lead"></span><span class="pr">£3.00</span></div><p class="sc-dishDesc">Buttered and toasted, with jam if you like.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-bacon-pancakes.jpg" alt="Bacon and maple pancakes" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-bacon-pancakes.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Bacon-Maple Pancakes</span><span class="lead"></span><span class="pr">£6.50</span></div><p class="sc-dishDesc">A sweet-and-savoury favourite.</p></div>
+        </article>
+        <article class="sc-dish">
+          <figure class="sc-shot"><img class="sc-shotImg" src="assets/photos/dish-scone.jpg" alt="Scone with jam and cream" loading="lazy"><figcaption class="sc-shotPh">Add <b>dish-scone.jpg</b></figcaption></figure>
+          <div class="sc-dishBody"><div class="sc-dishTop"><span class="nm">Scone, Jam &amp; Cream <span class="sc-tag sc-tag--v">V</span></span><span class="lead"></span><span class="pr">£4.20</span></div><p class="sc-dishDesc">Freshly baked, the proper way.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Drinks (text list) -->
+    <section class="sc-menuSection">
+      <div class="sc-menuSecHead"><span class="sc-num">05</span><h2>Drinks</h2><span class="sc-when">Made fresh</span></div>
+      <div class="sc-menuList">
+        <div class="sc-mItem"><div class="sc-mTop"><span class="nm">Espresso</span><span class="lead"></span><span class="pr">£2.20</span></div></div>
+        <div class="sc-mItem"><div class="sc-mTop"><span class="nm">Flat White / Latte / Cappuccino</span><span class="lead"></span><span class="pr">£3.20</span></div></div>
+        <div class="sc-mItem"><div class="sc-mTop"><span class="nm">Pot of Tea</span><span class="lead"></span><span class="pr">£2.50</span></div></div>
+        <div class="sc-mItem"><div class="sc-mTop"><span class="nm">Hot Chocolate</span><span class="lead"></span><span class="pr">£3.40</span></div></div>
+        <div class="sc-mItem"><div class="sc-mTop"><span class="nm">Fresh Orange Juice</span><span class="lead"></span><span class="pr">£2.80</span></div></div>
+        <div class="sc-mItem"><div class="sc-mTop"><span class="nm">Iced Latte / Iced Coffee</span><span class="lead"></span><span class="pr">£3.40</span></div></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="sc-menuCta">
+      <span class="sc-kicker">Book or order ahead</span>
+      <h2>Fancy a table?</h2>
+      <p>Give us a ring to book, or for any dietary questions — we're happy to help.</p>
+      <a class="sc-btn sc-btnPrimary" href="tel:+441603766556">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call 01603 766556
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="sc-footer">
+  <div class="sc-wrap">
+    <div class="sc-footerCols">
+      <div class="sc-footerCol">
+        <div class="sc-footerWordmark">The Street Café</div>
+        <p>Breakfast, brunch and proper coffee on Magdalen Street, Norwich. Open from 8am, seven days a week.</p>
+      </div>
+      <div class="sc-footerCol">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="visit.html">Visit us</a>
+      </div>
+      <div class="sc-footerCol">
+        <h4>Find us</h4>
+        <p>147 Magdalen Street<br>Norwich NR3 1NF</p>
+        <p><a href="tel:+441603766556">01603 766556</a></p>
+      </div>
+    </div>
+    <div class="sc-footerBase">
+      <span>© <span id="year"></span> The Street Café</span>
+      <span class="sc-credit">Site by <a href="https://kevwebdesign.com" target="_blank" rel="noopener">Kevin Labs</a></span>
+      <span>Made in Norwich</span>
+    </div>
+  </div>
+</footer>
+
+<a class="sc-fab" href="tel:+441603766556" aria-label="Call The Street Café">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  Call us
+</a>
+
+<script src="app.js?v=3"></script>
+</body>
+</html>

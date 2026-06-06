@@ -1,0 +1,380 @@
+/* ============================================================
+   The Street Café — Norwich
+   Photo-led, editorial café site. Prefix: sc-
+   Cream paper · bottle-green · egg-yolk amber
+   Fraunces (display) · Inter (body) · Space Mono (labels/prices)
+   ============================================================ */
+
+:root {
+  --paper:     #f4ede0;
+  --paper-2:   #ece1cf;
+  --card:      #fbf8f0;
+  --ink:       #20180f;
+  --ink-soft:  #5a4d3d;
+  --muted:     #8d7d68;
+  --yolk:      #f2b330;
+  --yolk-d:    #dd9c14;
+  --forest:    #243b30;
+  --forest-2:  #1c2f26;
+  --sage:      #7c8a6a;
+  --line:      rgba(32, 24, 15, .14);
+  --line-2:    rgba(32, 24, 15, .08);
+
+  --maxw:      1160px;
+  --radius:    20px;
+  --radius-lg: 30px;
+
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans:  "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:  "Space Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background-color: var(--paper);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -.015em;
+  margin: 0;
+}
+em { font-style: italic; }
+
+.sc-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+/* ---------- Mono label / kicker ---------- */
+.sc-kicker {
+  font-family: var(--mono);
+  font-size: .74rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--yolk-d);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.sc-kicker::before { content: ""; width: 22px; height: 2px; background: var(--yolk-d); display: inline-block; }
+.sc-num { font-family: var(--mono); font-size: .8rem; color: var(--yolk-d); letter-spacing: .1em; }
+
+/* ---------- Buttons ---------- */
+.sc-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 26px; border-radius: 999px;
+  font-family: var(--sans); font-weight: 600; font-size: .98rem;
+  text-decoration: none; border: 1.5px solid transparent; cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease, color .16s ease;
+}
+.sc-btn svg { width: 18px; height: 18px; }
+.sc-btn:active { transform: translateY(1px); }
+.sc-btnPrimary { background: var(--yolk); color: var(--ink); box-shadow: 0 10px 24px rgba(221, 156, 20, .32); }
+.sc-btnPrimary:hover { background: var(--yolk-d); transform: translateY(-2px); }
+.sc-btnOutline { background: transparent; color: var(--ink); border-color: var(--ink); }
+.sc-btnOutline:hover { background: var(--ink); color: var(--paper); }
+.sc-btnLight { background: var(--paper); color: var(--ink); }
+.sc-btnLight:hover { background: #fff; transform: translateY(-2px); }
+.sc-btnOnPhoto { background: var(--paper); color: var(--ink); }
+.sc-btnOnPhoto:hover { background: #fff; transform: translateY(-2px); }
+.sc-btnGhostLight { background: transparent; color: var(--paper); border-color: rgba(244,237,224,.6); }
+.sc-btnGhostLight:hover { background: rgba(244,237,224,.14); border-color: var(--paper); }
+
+/* ---------- Status chip ---------- */
+.sc-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: .76rem; letter-spacing: .04em;
+  color: var(--ink-soft); background: var(--card); border: 1px solid var(--line);
+  padding: 6px 13px; border-radius: 999px;
+}
+.sc-status--onPhoto { color: var(--paper); background: rgba(32,24,15,.42); border-color: rgba(244,237,224,.25); backdrop-filter: blur(4px); }
+.sc-statusDot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.sc-status.is-open .sc-statusDot { background: #5ec46a; animation: pulse 2.2s infinite; }
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(94, 196, 106, .5); }
+  70%  { box-shadow: 0 0 0 7px rgba(94, 196, 106, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(94, 196, 106, 0); }
+}
+
+/* ============================================================
+   Photo system — graceful drop-in placeholders
+   <figure class="sc-shot"><img class="sc-shotImg" ...><figcaption class="sc-shotPh">…</figcaption></figure>
+   JS adds .is-missing to the figure when the image file isn't there yet.
+   ============================================================ */
+.sc-shot {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(150deg, #e8dcc4, #d8c8a8 55%, #c9b58e);
+}
+.sc-shotImg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sc-shotPh {
+  position: absolute; inset: 0;
+  display: none;
+  flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  text-align: center; padding: 16px;
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.sc-shotPh b { color: var(--ink); }
+.sc-shotPh::before {
+  content: "";
+  width: 34px; height: 30px;
+  background: no-repeat center/contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2320180f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z'/%3E%3Ccircle cx='12' cy='13' r='4'/%3E%3C/svg%3E");
+  opacity: .55;
+}
+.sc-shot.is-missing .sc-shotImg { display: none; }
+.sc-shot.is-missing .sc-shotPh { display: flex; }
+
+/* ============================================================
+   Header
+   ============================================================ */
+.sc-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(244, 237, 224, .86); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.sc-headerInner { max-width: var(--maxw); margin: 0 auto; padding: 14px 22px; display: flex; align-items: center; gap: 18px; }
+.sc-logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1; margin-right: auto; }
+.sc-logoMark { font-family: var(--serif); font-weight: 600; font-size: 1.36rem; color: var(--ink); letter-spacing: -.02em; }
+.sc-logoSub { font-family: var(--mono); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--yolk-d); margin-top: 4px; }
+
+.sc-nav { display: flex; align-items: center; gap: 2px; }
+.sc-navLink { position: relative; text-decoration: none; color: var(--ink-soft); font-weight: 500; font-size: .96rem; padding: 8px 14px; border-radius: 999px; transition: color .15s ease; }
+.sc-navLink::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px; height: 2px; background: var(--yolk); transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
+.sc-navLink:hover { color: var(--ink); }
+.sc-navLink:hover::after, .sc-navLink.is-active::after { transform: scaleX(1); }
+.sc-navLink.is-active { color: var(--ink); font-weight: 600; }
+
+.sc-callBtn { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--paper); text-decoration: none; padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: .92rem; transition: background .15s ease; }
+.sc-callBtn:hover { background: var(--forest); }
+.sc-callBtn svg { width: 17px; height: 17px; }
+.sc-burger { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--ink); }
+.sc-burger svg { width: 26px; height: 26px; }
+
+/* ============================================================
+   Hero — illustration behind the text
+   ============================================================ */
+.sc-hero {
+  position: relative;
+  min-height: min(74vh, 640px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: #d8ccb2;
+}
+.sc-heroBg { position: absolute; inset: 0; z-index: 0; }
+.sc-heroBg img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+.sc-hero::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(28,22,14,.42) 0%, rgba(28,22,14,.34) 40%, rgba(28,22,14,.62) 100%);
+}
+.sc-heroInner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; padding: 70px 22px; color: var(--paper); }
+.sc-heroInner .sc-kicker { color: var(--yolk); }
+.sc-heroStatus { margin-bottom: 18px; }
+.sc-heroTitle { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; margin: 0 0 18px; text-shadow: 0 2px 24px rgba(0,0,0,.45); }
+.sc-heroTitle em { color: var(--yolk); }
+.sc-heroSub { font-size: 1.14rem; color: rgba(244,237,224,.94); max-width: 44ch; margin: 0 auto 26px; text-shadow: 0 1px 12px rgba(0,0,0,.4); }
+.sc-heroCtas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; }
+
+/* ============================================================
+   Ticker
+   ============================================================ */
+.sc-ticker { background: var(--ink); color: var(--paper); overflow: hidden; padding: 14px 0; white-space: nowrap; }
+.sc-tickerTrack { display: inline-flex; align-items: center; animation: marquee 34s linear infinite; }
+.sc-tickerTrack span { font-family: var(--serif); font-size: 1.18rem; padding: 0 26px; display: inline-flex; align-items: center; gap: 26px; }
+.sc-tickerTrack span::after { content: "✺"; color: var(--yolk); font-size: .9rem; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ============================================================
+   Section scaffolding
+   ============================================================ */
+.sc-section { padding: 84px 0; }
+.sc-section--forest { background: var(--forest); color: var(--paper); }
+.sc-section--tight { padding-top: 0; }
+.sc-secHead { max-width: 680px; margin: 0 auto 44px; }
+.sc-secHead--center { text-align: center; }
+.sc-secTitle { font-size: clamp(2.1rem, 4.4vw, 3.1rem); font-weight: 400; margin: 14px 0 12px; }
+.sc-secSub { color: var(--muted); font-size: 1.06rem; max-width: 52ch; }
+.sc-secHead--center .sc-secSub { margin-inline: auto; }
+.sc-secHead--center .sc-kicker { gap: 0; }
+.sc-secHead--center .sc-kicker::before { display: none; }
+
+/* ============================================================
+   Dish photo cards (home favourites + menu)
+   ============================================================ */
+.sc-dishGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); gap: 26px; }
+.sc-dish {
+  display: flex; flex-direction: column;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; box-shadow: 0 12px 30px rgba(32,24,15,.06);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.sc-dish:hover { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(32,24,15,.12); }
+.sc-dish .sc-shot { aspect-ratio: 4 / 3; }
+.sc-dishBody { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.sc-dishTop { display: flex; align-items: baseline; gap: 10px; }
+.sc-dishTop .nm { font-family: var(--serif); font-size: 1.22rem; font-weight: 500; color: var(--ink); }
+.sc-dishTop .lead { flex: 1; border-bottom: 2px dotted var(--line); transform: translateY(-5px); min-width: 14px; }
+.sc-dishTop .pr { font-family: var(--mono); font-weight: 700; color: var(--yolk-d); }
+.sc-dishDesc { color: var(--muted); font-size: .92rem; margin: 7px 0 0; }
+
+/* Tags */
+.sc-tag { display: inline-block; font-family: var(--mono); font-size: .58rem; font-weight: 700; letter-spacing: .06em; padding: 2px 6px; border-radius: 5px; margin-left: 6px; vertical-align: middle; transform: translateY(-1px); }
+.sc-tag--v  { background: #e3ecd4; color: #4f6132; }
+.sc-tag--vg { background: #d4ecd9; color: #2f6b41; }
+.sc-tag--gf { background: #f3e6c6; color: #8a6516; }
+
+/* ============================================================
+   Gallery — "straight from our kitchen" (Facebook-feed feel)
+   ============================================================ */
+.sc-gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 1fr; gap: 14px; }
+.sc-gallery .sc-shot { border-radius: 16px; aspect-ratio: 1; }
+.sc-gallery .sc-shot.is-wide { grid-column: span 2; aspect-ratio: 2 / 1; }
+.sc-gallery .sc-shot.is-tall { grid-row: span 2; aspect-ratio: 1 / 2; }
+.sc-galleryFoot { text-align: center; margin-top: 32px; }
+.sc-galleryFoot .sc-kicker { justify-content: center; }
+.sc-fbLink { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: .82rem; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--yolk); padding-bottom: 2px; }
+.sc-fbLink:hover { color: var(--yolk-d); }
+.sc-fbLink svg { width: 17px; height: 17px; }
+
+/* ============================================================
+   Split feature (about) — photo + text
+   ============================================================ */
+.sc-split { display: grid; grid-template-columns: 1fr 1fr; }
+.sc-split .sc-shot { min-height: 100%; }
+.sc-splitText { padding: clamp(40px, 6vw, 84px); display: flex; flex-direction: column; justify-content: center; }
+.sc-split--forest .sc-splitText { background: var(--forest); color: var(--paper); }
+.sc-split--forest .sc-kicker { color: var(--yolk); }
+.sc-split--forest .sc-kicker::before { background: var(--yolk); }
+.sc-splitQuote { font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.18; font-weight: 400; margin: 16px 0 20px; }
+.sc-splitQuote em { color: var(--yolk); }
+.sc-split--forest .sc-splitText p { color: rgba(244,237,224,.78); margin: 0 0 18px; }
+
+/* ============================================================
+   Page hero (menu / visit)
+   ============================================================ */
+.sc-pageHero { text-align: center; padding: 60px 22px 50px; border-bottom: 1px solid var(--line); }
+.sc-pageHero .sc-kicker { justify-content: center; }
+.sc-pageHero h1 { font-size: clamp(2.6rem, 5.6vw, 4rem); font-weight: 400; margin: 14px 0 14px; }
+.sc-pageHero p { color: var(--ink-soft); max-width: 50ch; margin: 0 auto; font-size: 1.06rem; }
+
+/* ============================================================
+   Menu page
+   ============================================================ */
+.sc-menuNote { text-align: center; font-family: var(--mono); color: var(--muted); font-size: .8rem; margin: 0 auto 48px; max-width: 70ch; line-height: 1.9; }
+.sc-menuSection { margin-bottom: 56px; }
+.sc-menuSecHead { display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; }
+.sc-menuSecHead h2 { font-size: 1.9rem; font-weight: 400; }
+.sc-menuSecHead .sc-when { font-family: var(--mono); font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-left: auto; }
+
+/* Simple text list (drinks) */
+.sc-menuList { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 56px; }
+.sc-mItem { padding: 14px 0; border-bottom: 1px solid var(--line-2); }
+.sc-mTop { display: flex; align-items: baseline; gap: 10px; }
+.sc-mTop .nm { font-weight: 600; font-size: 1.06rem; color: var(--ink); }
+.sc-mTop .lead { flex: 1; border-bottom: 2px dotted var(--line); transform: translateY(-5px); min-width: 16px; }
+.sc-mTop .pr { font-family: var(--mono); font-weight: 700; color: var(--yolk-d); }
+
+.sc-menuCta { text-align: center; background: var(--ink); color: var(--paper); border-radius: var(--radius-lg); padding: 52px 24px; margin-top: 12px; }
+.sc-menuCta .sc-kicker { color: var(--yolk); justify-content: center; }
+.sc-menuCta .sc-kicker::before { display: none; }
+.sc-menuCta h2 { font-size: 2.1rem; font-weight: 400; margin: 10px 0 12px; }
+.sc-menuCta p { color: rgba(244,237,224,.78); margin: 0 0 26px; }
+
+/* ============================================================
+   Visit page
+   ============================================================ */
+.sc-visitGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; }
+.sc-infoCard { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; box-shadow: 0 14px 36px rgba(32,24,15,.06); }
+.sc-infoCard h3 { font-size: 1.4rem; font-weight: 400; margin-bottom: 16px; }
+.sc-infoRow { display: flex; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line-2); }
+.sc-infoRow:last-child { border-bottom: 0; }
+.sc-infoRow .ic { color: var(--yolk-d); flex-shrink: 0; margin-top: 2px; }
+.sc-infoRow .ic svg { width: 20px; height: 20px; display: block; }
+.sc-infoRow a { color: var(--ink); text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--yolk); }
+.sc-infoRow a:hover { color: var(--yolk-d); }
+.sc-infoRow .sub { color: var(--muted); font-size: .9rem; }
+
+.sc-hours { width: 100%; border-collapse: collapse; font-size: .98rem; }
+.sc-hours th, .sc-hours td { text-align: left; padding: 11px 0; border-bottom: 1px solid var(--line-2); }
+.sc-hours tr:last-child th, .sc-hours tr:last-child td { border-bottom: 0; }
+.sc-hours th { font-weight: 500; color: var(--ink-soft); }
+.sc-hours td { text-align: right; font-family: var(--mono); font-size: .9rem; color: var(--ink); }
+.sc-hours tr.is-today th { color: var(--ink); font-weight: 700; }
+.sc-hours tr.is-today td { color: var(--yolk-d); font-weight: 700; }
+.sc-hours tr.is-today th::after { content: " · today"; font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--yolk-d); font-weight: 700; }
+
+.sc-map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: 0 14px 36px rgba(32,24,15,.06); min-height: 360px; background: var(--paper-2); }
+.sc-map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; display: block; }
+
+.sc-visitShots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.sc-visitShots .sc-shot { border-radius: var(--radius); aspect-ratio: 3 / 2; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.sc-footer { background: var(--ink); color: var(--paper); padding: 64px 0 30px; }
+.sc-footerCols { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; padding-bottom: 36px; border-bottom: 1px solid rgba(244,237,224,.16); }
+.sc-footerWordmark { font-family: var(--serif); font-size: 1.7rem; margin-bottom: 12px; }
+.sc-footerCol p { color: rgba(244,237,224,.72); margin: 0 0 8px; }
+.sc-footerCol h4 { font-family: var(--mono); font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 14px; color: var(--yolk); font-weight: 700; }
+.sc-footerCol a { display: block; color: rgba(244,237,224,.8); text-decoration: none; padding: 5px 0; transition: color .15s ease; }
+.sc-footerCol a:hover { color: #fff; }
+.sc-footerBase { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-top: 24px; font-family: var(--mono); font-size: .78rem; color: rgba(244,237,224,.6); letter-spacing: .02em; }
+.sc-credit a { color: var(--yolk); text-decoration: none; font-weight: 700; }
+.sc-credit a:hover { text-decoration: underline; }
+
+/* ============================================================
+   Floating call button
+   ============================================================ */
+.sc-fab { position: fixed; right: 18px; bottom: 18px; z-index: 60; display: inline-flex; align-items: center; gap: 10px; background: var(--yolk); color: var(--ink); text-decoration: none; padding: 14px 20px; border-radius: 999px; font-weight: 700; box-shadow: 0 14px 30px rgba(221,156,20,.45); transition: transform .15s ease, background .15s ease; }
+.sc-fab:hover { background: var(--yolk-d); transform: translateY(-2px); }
+.sc-fab svg { width: 20px; height: 20px; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .sc-hero { min-height: 78vh; }
+  .sc-gallery { grid-template-columns: repeat(2, 1fr); }
+  .sc-gallery .sc-shot.is-wide, .sc-gallery .sc-shot.is-tall { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
+  .sc-split { grid-template-columns: 1fr; }
+  .sc-split .sc-shot { aspect-ratio: 16 / 10; }
+  .sc-menuList { grid-template-columns: 1fr; gap: 0; }
+  .sc-visitGrid { grid-template-columns: 1fr; gap: 38px; }
+  .sc-footerCols { grid-template-columns: 1fr 1fr; }
+
+  .sc-nav { position: fixed; inset: 0 0 0 auto; width: min(80vw, 320px); flex-direction: column; align-items: stretch; background: var(--card); padding: 88px 22px 24px; gap: 4px; box-shadow: -22px 0 60px rgba(32,24,15,.2); transform: translateX(100%); transition: transform .26s ease; z-index: 45; }
+  .sc-nav.is-open { transform: translateX(0); }
+  .sc-navLink { padding: 15px 16px; font-size: 1.08rem; }
+  .sc-navLink::after { display: none; }
+  .sc-burger { display: inline-flex; order: 3; }
+  .sc-callBtn span { display: none; }
+  .sc-callBtn { padding: 10px; }
+  .sc-callBtn svg { width: 20px; height: 20px; }
+}
+
+@media (max-width: 560px) {
+  .sc-section { padding: 56px 0; }
+  .sc-footerCols { grid-template-columns: 1fr; gap: 28px; }
+  .sc-heroTitle { font-size: clamp(2.4rem, 9vw, 3.2rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
